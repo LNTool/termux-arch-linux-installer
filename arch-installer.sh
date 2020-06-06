@@ -42,8 +42,8 @@ if [ ! -e ArchLinuxARM-aarch64-latest.tar.gz ];then
 		echo -e "\033[0m"
 		;;
 	esac
-read -r -p "[?] ArchLinux ARM-aarch64-latest.tar.gz was not detected. Download? (Yes/no) " 
-inputcase $input in
+read -r -p "[?] ArchLinux ARM-aarch64-latest.tar.gz was not detected. Download? (Yes/no) " input
+case $input in
 [yY][eE][sS]|[yY])
 tar -xzvf ArchLinuxARM-aarch64-latest.tar.gz
 axel https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/startarch
