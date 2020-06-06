@@ -19,3 +19,7 @@ wget https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/
 ``
 mv resolv.conf ${HOME}/arch-arm64/etc/resolv.conf
 ``
+
+## Screen Capture:
+
+![image](https://github.com/MC-EO/termux-arch-linux-installer/blob/master/Screenshot.png)
