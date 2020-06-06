@@ -4,5 +4,5 @@ It has no network and requires you to configure it manually.
 It doesn't have any binding.
 ## Installation method:
 ``
-bash -c "$(curl -L https://github.com/MC-EO/termux-arch-linux-installer/edit/master/arch-installer.sh)"
+bash -c "$(curl -L https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/arch-installer.sh)"
 ``
