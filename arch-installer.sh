@@ -18,7 +18,7 @@ if [ ! -d arch-arm64 ];then
 fi
 cd arch-arm64
 if [ ! -e ArchLinuxARM-aarch64-latest.tar.gz ];then
-	read -r -p "[?] ArchLinux ARM-aarch64-latest.tar.gz was not detected. Download? (Yes/no) " input
+	read -r -p "[?] Do you want to continue with the installation?Do you want to continue installing archlinux? (Yes/no) " input
 	case $input in 
 		[yY][eE][sS]|[yY])
 		echo -e "\033[32m"
