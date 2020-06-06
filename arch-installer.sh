@@ -50,6 +50,8 @@ axel https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/
 mv startarch $PREFIX/bin/startarch
 echo -e "\033[32mInstall OK"
 echo -e "\033[32mYou can start archlinux by typing the'startarch'"
+;;
 [nN][oO]|[nN])
 echo -e "\033[31mcancel"
+;;
 fi
