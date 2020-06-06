@@ -29,8 +29,8 @@ if [ ! -e ArchLinuxARM-aarch64-latest.tar.gz ];then
 		cd ${HOME}
 		mv arch-arm64/ArchLinuxARM-aarch64-latest.tar.gz ${HOME}/
 		axel https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/startarch
-                mv startarch ${PREFIX}/bin/startarch
-                chmod 777 ${PREFIX}/bin/startarch
+                chmod 777 startarch
+		mv startarch ${PREFIX}/bin/startarch
 		echo -e "\033[32m[*] Install OK"
 		echo -e "\033[32m[!] You can enter 'startarch' into your archlinux"
 		echo -e "\033[0m"
