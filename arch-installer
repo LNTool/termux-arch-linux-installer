@@ -1,0 +1,89 @@
+#!/data/data/com.termux/files/usr/bin/bash
+clear
+df=$(df)
+case `dpkg --print-architecture` in
+aarch64)
+archid="aarch64" ;;
+arm)
+archid="armv7" ;;
+*)
+echo "\033[31m[?] unknown architecture\033[0m";
+exit 1 ;;
+esac
+echo -e "\033[33mInstalling required dependencies"
+apt-get update
+apt-get upgrade -y
+apt-get install -y axel figlet proot openssl-tool tar
+clear
+echo -e "\033[32m"
+figlet Termux   Arch
+echo -e "\033[33m[*] Script version: 2.1"
+echo -e "\033[32m[@] Github : https://github.com/MC-EO/termux-arch-linux-installer/tree/master "
+echo -e "\033[32m[@] QQ : 3348006114"
+echo -e "\033[36m[&] Your kernel : ${archid}"
+echo -e "\033[36m[&] Storing : ${df}"
+echo -e "\033[33m[!] The installation will consume 1 GB of your storage space"
+
+cd ${HOME}
+if [ ! -d arch-${archid} ];then
+	mkdir -p arch-${archid}
+fi
+cd arch-${archid}
+if [ ! -e ArchLinuxARM-${archid}-latest.tar.gz ];then
+	read -r -p "[?] Do you want to continue installing TermuxArch Linux? (Yes/no) " input
+	case $input in 
+		[yY][eE][sS]|[yY])
+		echo -e "\033[32m"
+                figlet Install  Arch
+		echo -e "\033[36m[+] From archlinuxarm.org Download ArchLinux ARM-${archid}-latest.tar.gz"
+		echo -e "\033[32m[*] Downloading rootfs..."
+		axel -q http://fl.us.mirror.archlinuxarm.org//os/ArchLinuxARM-${archid}-latest.tar.gz
+		echo -e "\033[32m[*] Decompressing rootfs..."
+		tar -xzvf ArchLinuxARM-${archid}-latest.tar.gz
+		cd ${HOME}
+		rm arch-${archid}/ArchLinuxARM-${archid}-latest.tar.gz
+		axel -q https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/resolv.conf
+		mv resolv.conf arch-${archid}/etc
+		echo -e "\033[32m[OK] Install OK"
+		echo -e "\033[32m[OK] You can enter 'startarch' into your archlinux"
+		echo -e "\033[0m"
+		;;
+		[nN][oO]|[nN]*)
+		clear
+		echo -e "\033[31m"
+                figlet Cancelled
+		echo -e "\033[31m[!] You have terminated the installation"
+		echo -e "\033[0m"
+		;;
+	esac
+fi
+
+ARCHSTART=${PREFIX}/bin/startarch
+cat > $ARCHSTART <<- EOF
+#!/data/data/com.termux/files/usr/bin/bash                                              
+cd \${HOME}
+unset LD_PRELOAD                                                                        
+command="proot"                                                                         
+command+=" --link2symlink"
+command+=" -0"                                                                         
+command+=" -r arch-${archid}"
+command+=" -b /dev"
+command+=" -b /proc"
+command+=" -b arch-${archid}/root:/dev/shm"
+command+=" -w /root"                                                                    
+command+=" /usr/bin/env -i"
+command+=" HOME=/root"                                                                  
+command+=" PATH=/usr/local/sbin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/local/games"
+command+=" TERM=\$TERM"
+#language
+command+=" LANG=C.UTF-8"
+command+=" /bin/bash --login"                                                           
+com="\$@"
+if [ -z "\$1" ];then
+exec \$command                                                                       
+else
+\$command -c "\$com"
+fi
+EOF
+chmod 777 $ARCHSTART
+startarch pacman -Sy
