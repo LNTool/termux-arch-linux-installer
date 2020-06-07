@@ -7,17 +7,7 @@ You can find it at Google Play, F-Droid, Coolapk
 
 Open Termux and enter:
 ``
-bash -c "$(curl -L https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/arch-installer.sh)"
-``
-
-## DNS server configuration method:
-
-``
-wget https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/resolv.conf
-``
-
-``
-mv resolv.conf ${HOME}/arch-arm64/etc/resolv.conf
+bash -c "$(curl -L https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/arch-installer)"
 ``
 
 ## Screen Capture:
