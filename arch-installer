@@ -39,7 +39,7 @@ if [ ! -e ArchLinuxARM-${archid}-latest.tar.gz ];then
 		echo -e "\033[32m[*] Downloading rootfs..."
 		axel -q http://fl.us.mirror.archlinuxarm.org//os/ArchLinuxARM-${archid}-latest.tar.gz
 		echo -e "\033[32m[*] Decompressing rootfs..."
-		tar -xzvf ArchLinuxARM-${archid}-latest.tar.gz
+		proot --link2symlink tar -xzvf ArchLinuxARM-${archid}-latest.tar.gz
 		cd ${HOME}
 		rm arch-${archid}/ArchLinuxARM-${archid}-latest.tar.gz
 		axel -q https://raw.githubusercontent.com/MC-EO/termux-arch-linux-installer/master/resolv.conf
